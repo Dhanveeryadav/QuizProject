@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>QG</title>
+  </head>
+  <body>
+    <header>
+      <div>
+        <button class="nav-toggle" aria-label="open navigation">
+          <span class="hamburger"></span>
+        </button>
+        <a class="logo" href="#">
+          <img src="img/logo.svg" alt="">
+      </a>
+      </div>
+      <nav class="nav">
+        <ul class="nav-list">
+          <div class="row">
+              <li class="nav-items nav-space"><a class="nav-links" href="#">Home</a></li>
+              <li class="nav-items nav-space"><a class="nav-links" href="#">Home</a></li>
+              <li class="nav-items nav-space"><a class="nav-links" href="#">Home</a></li>
+          </div>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="form-card">
+        <form action="/" method="post">
+          <div>
+            <label class="form-label" for="name">Name</label>
+            <input class="form-input" type="text" name="name" placeholder="Name" />
+            <label class="form-label" for="email">Email</label>
+            <input class="form-input" type="text" name="email" placeholder="Email" />
+            <label class="form-label" for="Password">Password</label>
+            <input class="form-input" type="text" name="password" placeholder="Password" />
+            <label class="form-label" for="college">College</label>
+            <input class="form-input" type="text" name="college" placeholder="College" />
+          </div>
+            <input class="form-input btn" type="submit" value="Submit">
+        </form>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>
