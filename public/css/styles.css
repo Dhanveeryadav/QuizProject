@@ -85,11 +85,6 @@ header {
   margin-right: 1.8em;
 }
 
-/* 
-.nav-item {
-  margin-top: 0.75em;
-} */
-
 .nav-space {
   margin-top: 0.75em;
 }
@@ -145,14 +140,17 @@ form {
 }
 
 .form-container {
-    background-color: #f2f2f2;
+    /* background-color: #f2f2f2; */
     padding: 1.45em;
     margin: 0 auto;
 }
 
 .question-container {
     margin-top: 2em;
-    margin-bottom: 2em;
+    /* margin-bottom: 2em; */
+    background-color: #f2f2f2;
+    padding: 3em;
+
 }
 
 .question-text {
@@ -171,9 +169,25 @@ form {
     margin-top: 1em;
 }
 
-.answer-option:hover {
-    background-color: #e6e6e6;
+.answer-option:not(.selected-answer):hover {
+  background-color: #e6e6e6;
 }
+
+.selected-answer {
+  background-color: green;
+}
+
+.question-spacing {
+  margin-bottom: 2em;
+  background-color: blue;
+}
+
+.question-button {
+  width: 30%;
+  margin-top: 2em;
+  margin-left: 65em;
+}
+
 
 @media (min-width: 700px) {
   .row {

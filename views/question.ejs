@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+    <title>QG</title>
+  </head>
+  <body>
+    <header>
+      <div>
+        <button class="nav-toggle" aria-label="open navigation">
+          <span class="hamburger"></span>
+        </button>
+      </div>
+      <nav class="nav">
+        <ul class="nav-list">
+          <div class="row">
+              <li class="nav-items nav-space"><a class="nav-links" href="#">Home</a></li>
+              <li class="nav-items nav-space"><a class="nav-links" href="#">Home</a></li>
+              <li class="nav-items nav-space"><a class="nav-links" href="#">Home</a></li>
+          </div>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="form-container">
+      <form action="questions" method="post">
+        <% questions.forEach((question, questionIndex) => { %>
+        <div class="question-container">
+          <div class="question-text">
+            <p><%= question.question %></p>
+          </div>
+          <div class="answer-container">
+            <% question.options.forEach((option, optionIndex) => { %>
+            <div
+              class="answer-option"
+              data-question="<%= questionIndex %>"
+              data-option="<%= optionIndex %>"
+              onclick="selectAnswer(this)"
+            >
+              <label class="answer-label" for="option_<%= optionIndex %>">
+                <%= option %>
+              </label>
+            </div>
+            <% }) %>
+          </div>
+        </div>
+        <% }) %>
+        <button type="submit" class="form-input btn question-button">Submit</button>
+      </form>
+    </div>
+
+    <script>
+      function selectAnswer(optionElement) {
+        optionElement.classList.toggle("selected-answer");
+      }
+    </script>
+    <script src="/js/main.js"></script>
+  </body>
+</html>
