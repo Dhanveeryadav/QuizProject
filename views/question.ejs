@@ -4,6 +4,9 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/css/styles.css" />
     <title>QG</title>
   </head>
@@ -34,16 +37,13 @@
           </div>
           <div class="answer-container">
             <% question.options.forEach((option, optionIndex) => { %>
-            <div
-              class="answer-option"
-              data-question="<%= questionIndex %>"
-              data-option="<%= optionIndex %>"
-              onclick="selectAnswer(this)"
-            >
-              <label class="answer-label" for="option_<%= optionIndex %>">
+              <div class="answer-option" data-question="<%= questionIndex %>" data-option="<%= optionIndex %>"
+                onclick="selectAnswer(this)">
+              <label name="answers[<%= questionIndex %>]" class="answer-label" for="option_<%= optionIndex %>">
                 <%= option %>
               </label>
-            </div>
+              <input type="checkbox" name="answers[<%= questionIndex %>]" value="<%= optionIndex %>" class="answer-checkbox" hidden />
+            </div>            
             <% }) %>
           </div>
         </div>
@@ -54,8 +54,10 @@
 
     <script>
       function selectAnswer(optionElement) {
-        optionElement.classList.toggle("selected-answer");
-      }
+  optionElement.classList.toggle("selected-answer");
+  const checkbox = optionElement.querySelector(".answer-checkbox");
+  checkbox.checked = !checkbox.checked;
+}
     </script>
     <script src="/js/main.js"></script>
   </body>

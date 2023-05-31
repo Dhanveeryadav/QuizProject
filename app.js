@@ -74,36 +74,45 @@ app.get("/questions", function (req, res) {
 });
 
 app.post("/questions", function (req, res) {
-  const userAnswers = req.body.answers; // Get the user's answers from the request body
-  const categoryScores = {}; // Initialize an object to store the scores for each category
+  const userAnswers = req.body.answers; // Get the submitted form data
 
-  for (const category in userAnswers) {
-    if (userAnswers.hasOwnProperty(category)) {
-      console.log(`Category: ${category}`);
+  // Iterate over the user's answers and check them against the correct answers
+  let score = 0;
+  for (const questionIndex in userAnswers) {
+    if (userAnswers.hasOwnProperty(questionIndex)) {
+      const userAnswerArray = Array.isArray(userAnswers[questionIndex])
+        ? userAnswers[questionIndex]
+        : [userAnswers[questionIndex]]; // Convert single value to array if needed
 
-      const categoryQuestions = jsonData.questions[category]; // Get the questions for the category from your JSON data
-      const categoryUserAnswers = userAnswers[category]; // Get the user's answers for the category
+      // Retrieve the corresponding question and correct answer
+      const question = req.session.randomQuestions[questionIndex];
+      const correctAnswerArray = question.answer; // Array of correct options
 
-      // Iterate over the questions in the category
-      for (let i = 0; i < categoryQuestions.length; i++) {
-        const question = categoryQuestions[i];
-        const userAnswer = categoryUserAnswers[i];
-        const correctAnswer = question.answer;
-
-        // Compare the user's answer with the correct answer
-        if (userAnswer === correctAnswer) {
-          console.log(`Question ${question.index}: Correct`);
-          categoryScores[category] = (categoryScores[category] || 0) + 1; // Increment the score for the category
-        } else {
-          console.log(`Question ${question.index}: Incorrect`);
-        }
+      // Compare the user's answer with the correct answer
+      if (arraysEqual(userAnswerArray, correctAnswerArray)) {
+        score++;
       }
     }
   }
 
-  console.log("Category Scores:", categoryScores); // Print the category scores to the console
-  res.send("Scores calculated!"); // You can send a response back to the client if needed
+  // Do something with the score (e.g., save it to the database, display it to the user, etc.)
+  console.log("User score:", score);
+
+  res.send("Score calculated: " + score); // Send the score back to the client
 });
+
+// Helper function to compare arrays for equality
+function arraysEqual(arr1, arr2) {
+  if (arr1.length !== arr2.length) {
+    return false;
+  }
+  for (let i = 0; i < arr1.length; i++) {
+    if (arr1[i] !== arr2[i]) {
+      return false;
+    }
+  }
+  return true;
+}
 
 
 function getRandomQuestions(jsonData, count) {
